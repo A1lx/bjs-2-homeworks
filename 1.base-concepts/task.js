@@ -8,14 +8,11 @@ function solveEquation(a, b, c) {
     let secondX = (-b - Math.sqrt(d)) / (2 * a);
     arr[0] = firstX;
     arr[1] = secondX;
-    return arr;
   } else if (d === 0) {
     let x = -b / (2 * a); // один корень
     arr[0] = x;
-    return arr;
-  } else {
-    return arr;
   }
+  return arr;
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
