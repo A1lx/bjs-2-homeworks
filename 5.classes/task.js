@@ -67,7 +67,7 @@ class DetectiveBook extends Book {
 // 2 задача
 
 class Library {
-  constructor(name, books) {
+  constructor(name) {
     this.name = name;
     this.books = [];
   }
@@ -79,42 +79,58 @@ class Library {
   }
   
   findBookBy(type, value) {
-    for (let i = 0; i < this.books.length; i++) {
-      if (this.books[i][type] === value) {
-        return this.books[i];
-      }
-    }
-    return null;
+    const findResult = this.books.find((item) => item[type] === value);
+    return findResult || null;
   }
 
-  giveBookByName(name) {
-    const bookToGive = this.findBookBy("name", name);
-    if (bookToGive) {
-      const bookIndex = this.books.indexOf(bookToGive);
-      this.books.splice(bookIndex, 1);
-      return bookToGive;
-    } else {
-      return null;
-    }
+  giveBookByName(bookName) {
+    const findResult = this.books.find((item) => item.name === bookName);
+    this.books = this.books.filter((item) => item.name !== bookName);
+    return findResult || null;
   }
 }
 
-// //3 задача
+//3 задача
 
-// class Student {
-//   constructor(name, marks) {
-//     this.name = name;
-//     this.marks = {};
-//   }
+class Student {
+  constructor(name) {
+    this.name = name;
+    this.marks = {};
+  }
 
-//   addMark(mark, subject) {
-//     if (mark >= 2 && mark <= 5) {
-//       if (Object.keys(this).includes(subject) === false) {
-//         this.marks = [];
-//       }
-//     }
+  addMark(mark, subject) {
+    if (mark >= 2 && mark <= 5) {
+      if (Object.keys(this.marks).includes(subject) === false) {
+        this.marks[subject] = []; 
+      }
+      this.marks[subject].push(mark); 
+    }
+  }
 
-//   }
+  getAverageBySubject(subject) {
+    if ((Object.keys(this.marks).includes(subject) === false)) {
+      return 0;
+    } else {
+      let sum = 0;
+      for (let index = 0; index < this.marks[subject].length; index++) {
+        sum += this.marks[subject][index];
+      }
+      return sum / this.marks[subject].length;
+      // Object.values(this.marks[subject]).reduce((sum, mark, index, arr) => {
+      //   sum += mark;
+      //   if (index === arr.length - 1) {
+      //     return sum / arr.length;
+      //   }
+      //   return sum;
+      // }, 0)
+    }
+  }
 
-
-// }
+  getAverage() {
+    let sum = 0;
+    for (let index = 0; index < Object.keys(this.marks).length; index++) {
+      sum += this.getAverageBySubject(Object.keys(this.marks)[index]);
+    }
+    return sum / Object.keys(this.marks).length;
+  }
+}
