@@ -116,16 +116,9 @@ class Student {
         sum += this.marks[subject][index];
       }
       return sum / this.marks[subject].length;
-      // Object.values(this.marks[subject]).reduce((sum, mark, index, arr) => {
-      //   sum += mark;
-      //   if (index === arr.length - 1) {
-      //     return sum / arr.length;
-      //   }
-      //   return sum;
-      // }, 0)
     }
   }
-
+  
   getAverage() {
     let sum = 0;
     for (let index = 0; index < Object.keys(this.marks).length; index++) {
